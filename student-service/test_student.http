@@ -1,0 +1,3 @@
+### 测试放行（带管理员Token）
+GET http://localhost:8081/admin/student/list
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE3OTA3NzY3MjR9.clM8mbkcjG2BId_xcwboljHU32Gb3osb2WWkG5j1kt4

@@ -1,0 +1,17 @@
+POST http://localhost:8081/student/register?code=1234
+Content-Type: application/json
+
+{
+  "username": "wangwu",
+  "password": "123456",
+  "nickname": "王五",
+  "phone": "13900000000"
+}
+### 登录 wangwu
+POST http://localhost:8081/student/login?username=wangwu&password=123456&code=1234
+### 登录 lisi
+POST http://localhost:8081/student/login?username=lisi&password=123456&code=1234
+### 登录 lisi
+POST http://localhost:8081/student/login?username=lisi&password=123456&code=1234
+### 登录 wangwu 获取 Token
+POST http://localhost:8081/student/login?username=wangwu&password=123456&code=1234

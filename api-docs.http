@@ -1,0 +1,49 @@
+### ==========================================
+### 校园二手书平台 - 接口测试文档 (Postman替代)
+### 注意：测试受保护接口时，需先登录获取Token填入下方
+### ==========================================
+
+### 1. 学生注册
+POST http://localhost:8081/student/register?code=1234
+Content-Type: application/json
+
+{
+  "username": "zhangsan",
+  "password": "123456",
+  "nickname": "张三",
+  "phone": "13800000000"
+}
+
+### 2. 学生登录 (获取Token)
+POST http://localhost:8081/student/login?username=zhangsan&password=123456&code=1234
+
+### 3. 管理员登录 (获取管理员Token)
+POST http://localhost:8081/admin/login?username=admin&password=123456
+
+### 4. 查询图书列表 (支持分页和模糊搜索)
+GET http://localhost:8082/book/list?page=1&size=10&keyword=Java
+
+### 5. 发布图书
+POST http://localhost:8082/book/add
+Content-Type: application/json
+
+{
+  "title": "Java编程思想",
+  "author": "Bruce Eckel",
+  "price": 45.50,
+  "stock": 10,
+  "sellerId": 1
+}
+
+### 6. 测试乐观锁扣减库存 (下单时由订单服务调用)
+POST http://localhost:8082/book/deduct?bookId=1&quantity=1&version=1
+
+### 7. 创建订单 (需要携带Token)
+POST http://localhost:8083/order/create?bookId=1&quantity=1&version=2
+Authorization: Bearer 这里填入登录获取的Token
+
+### 8. 查询订单列表
+GET http://localhost:8083/order/list
+
+### 9. AI 助手智能问答
+POST http://localhost:8084/ai/chat?message=有没有Java相关的书？

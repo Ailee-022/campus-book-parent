@@ -1,0 +1,17 @@
+### 1. 发布图书
+POST http://localhost:8082/book/add
+Content-Type: application/json
+
+{
+  "title": "Java编程思想",
+  "author": "Bruce Eckel",
+  "price": 45.50,
+  "stock": 10,
+  "sellerId": 1
+}
+
+### 2. 分页查询（GET请求）
+GET http://localhost:8082/book/list?page=1&size=5
+
+### 3. 测试乐观锁扣减库存（先确保数据库有 id=1, stock=10, version=1 的书）
+POST http://localhost:8082/book/deduct?bookId=1&quantity=1&version=1

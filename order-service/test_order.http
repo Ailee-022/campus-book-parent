@@ -1,0 +1,11 @@
+POST http://localhost:8083/order/create?bookId=1&quantity=1&version=2
+### 跨服务下单（必须传 version=3）
+
+POST http://localhost:8083/order/create?bookId=1&quantity=1&version=3
+### 带 Token 下单
+POST http://localhost:8083/order/create?bookId=1&quantity=1&version=4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiwangwuIiwiaXNzIjoiY2FtcHVzIn0.ArQDd0dVJhr4SPV6XmeEzC0PzLnY5tLhAP0AJxGQWnM
+
+### 带 Token 下单
+POST http://localhost:8083/order/create?bookId=1&quantity=1&version=4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoid2FuZ3d1IiwiZXhwIjoxNzkwNzc1MzE0fQ.eQL9Ci5FCMeB8LRdhlN4UIzP0pgbW6UquNiDHai0sOk
