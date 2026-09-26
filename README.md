@@ -83,8 +83,10 @@ Client[用户/Postman/前端]
 ### 5. 启动微服务
 依次启动 `BookServiceApplication` (8082)、`StudentServiceApplication` (8081)、`OrderServiceApplication` (8083)、`AiServiceApplication` (8084)。
 
-### 6. 接口测试
-导入根目录下的 `api-docs.http` 文件，使用登录接口获取 Token，测试所有功能。
+### 6. 接口测试说明
+本项目未使用额外的 Postman 客户端，而是使用了 **IDEA 内置的 HTTP Client**。
+所有接口测试用例均保存在根目录的 `api-docs.http` 文件中。
+该文件完全兼容 Postman 格式，可以直接在 IDEA 中一键运行，也支持一键导入至 Postman 中使用。
 
 ## 🤝 开发者
 - 作者：Ailee
