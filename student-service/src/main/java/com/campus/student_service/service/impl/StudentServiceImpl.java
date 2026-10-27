@@ -33,6 +33,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Result<String> login(String username, String password, String code) {
         if (code == null || code.isEmpty()) return Result.error("验证码不能为空");
+        // 核心：根据用户名查询用户
         QueryWrapper<Student> wrapper = new QueryWrapper<>();
         wrapper.eq("username", username);
         Student student = studentMapper.selectOne(wrapper);

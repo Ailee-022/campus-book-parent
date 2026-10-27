@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/book")
+@CrossOrigin
 public class BookController {
 
     @Autowired
@@ -50,6 +51,7 @@ public class BookController {
             @RequestParam(required = false) String keyword) {
 
         Page<Book> pageParam = new Page<>(page, size);
+        //模糊搜索：根据标题或作者查询
         QueryWrapper<Book> wrapper = new QueryWrapper<>();
 
         if (keyword != null && !keyword.isEmpty()) {
@@ -69,5 +71,14 @@ public class BookController {
             return Result.success("扣减成功");
         }
         return Result.error("扣减失败，库存不足或版本冲突");
+    }
+    // 6. 供订单服务调用：恢复（增加）库存，用于购物车失败回滚
+    @PostMapping("/revert")
+    public Result<String> revert(@RequestParam Long bookId, @RequestParam Integer quantity) {
+        // 直接更新库存
+        com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper<com.campus.book_service.entity.Book> wrapper = new com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper<>();
+        wrapper.setSql("stock = stock + " + quantity).eq("id", bookId);
+        bookService.update(wrapper);
+        return Result.success("库存恢复成功");
     }
 }

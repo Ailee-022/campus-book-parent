@@ -15,12 +15,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin("*")
 public class AdminController {
 
-    @Autowired private AdminMapper adminMapper;
-    @Autowired private StudentMapper studentMapper;
+    @Autowired
+    private AdminMapper adminMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
-    // 管理员登录
+    // 1. 管理员登录
     @PostMapping("/login")
     public Result<String> login(@RequestParam String username, @RequestParam String password) {
         QueryWrapper<Admin> wrapper = new QueryWrapper<>();
@@ -34,13 +37,31 @@ public class AdminController {
         return Result.success(token);
     }
 
-    // 管理员查看所有学生（考核要求：管理全部模块）
+    // 2. 管理员查看所有学生（查）
     @GetMapping("/student/list")
     public Result<List<Student>> studentList() {
         return Result.success(studentMapper.selectList(null));
     }
 
-    // 管理员删除学生
+    // 3. 管理员新增学生（增）
+    @PostMapping("/student/add")
+    public Result<String> addStudent(@RequestBody Student student) {
+        // 密码必须加密
+        student.setPassword(BCrypt.hashpw(student.getPassword()));
+        student.setStatus(1);
+        studentMapper.insert(student);
+        return Result.success("管理员新增学生成功");
+    }
+
+    // 4. 管理员修改学生信息（改）
+    @PutMapping("/student/update")
+    public Result<String> updateStudent(@RequestBody Student student) {
+        // 根据 ID 修改，如果传了密码，最好也校验一下，这里为了演示直接更新
+        studentMapper.updateById(student);
+        return Result.success("管理员修改学生信息成功");
+    }
+
+    // 5. 管理员删除学生（删）
     @DeleteMapping("/student/{id}")
     public Result<String> deleteStudent(@PathVariable Long id) {
         studentMapper.deleteById(id);

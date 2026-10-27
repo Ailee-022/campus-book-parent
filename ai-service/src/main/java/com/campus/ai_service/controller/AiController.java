@@ -10,12 +10,13 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/ai")
+@CrossOrigin("*")
 public class AiController {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String API_KEY = "你的智谱APIKey";
+    private static final String API_KEY = "你的API_KEY";
 
     // ⚠️ 智谱AI的API地址
     private static final String API_URL = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
@@ -33,7 +34,7 @@ public class AiController {
 
         // 3. 组装请求体的 JSON
         JSONObject requestBody = new JSONObject();
-        requestBody.set("model", "glm-4-flash"); // 智谱免费模型
+        requestBody.set("model", "glm-4-flash");
 
         JSONArray messages = new JSONArray();
         messages.add(new JSONObject().set("role", "system").set("content", systemPrompt));
